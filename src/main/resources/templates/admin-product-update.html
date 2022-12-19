@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <link rel="stylesheet" th:href="@{/css/admin-product.css}">
+  <link rel="stylesheet" th:href="@{/css/admin-fragments.css}">
+
+  <title>Bookstore management</title>
+</head>
+
+<body>
+<!--Start admin topbar-->
+<div th:replace="fragments::admin-topbar"></div>
+<!--End admin topbar-->
+<!--Start admin sidebar-->
+<div th:replace="fragments::admin-sidebar"></div>
+<!--End admin sidebar-->
+<div class="main">
+  <div class="mx-5 mt-4" style="width: 70%;">
+    <h2>Update Product</h2>
+    <form th:action="@{/do-product-update/{id} (id = ${product.productID})}" method="post" enctype="multipart/form-data" th:object="${product}">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Name</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Type here" th:field="*{name}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select class="form-select" aria-label="Default select example" th:field="*{category}" name="categories">
+          <option th:each="category : ${categories}"
+                  th:value="${category.categoryID}"
+                  th:text="${category.name}"
+                  th:checked="${product.category.categoryID == category.categoryID ? 'checked' : null}"
+          >
+          </option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput2" class="form-label">Author</label>
+        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Type here" th:field="*{author}">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput3" class="form-label">Price</label>
+        <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="Type here" th:field="*{price}">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlInput4" class="form-label">Stock</label>
+        <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="Type here" th:field="*{stock}">
+      </div>
+      <div class="mb-3" >
+        <label for="exampleFormControlInput5" class="form-label">Image</label>
+        <div class="d-flex align-items-center">
+          <img th:src="*{'data:image/jpeg;base64,' + imageUrl}" alt="" style="width:50px; height:auto;margin-right: 20px; position: relative;" >
+          <input type="file" style="position: relative" id="exampleFormControlInput5" name="imageProduct" th:value="null">
+        </div>
+
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{description}"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div >
+</div>
+</body>
+
+</html>

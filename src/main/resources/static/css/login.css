@@ -1,0 +1,19 @@
+.container {
+    box-shadow: 2px 5px 10px 10px rgba(0,0,0,25%);
+    margin-top: 100px;
+}
+
+.thumb {
+    width: 40%;
+}
+
+.thumb img {
+    width: 100%;
+}
+
+.content {
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 100px;
+    width: 30%;
+}

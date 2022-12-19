@@ -1,0 +1,66 @@
+/* start header */
+a {
+    text-decoration: none;
+    color: black;
+
+}
+
+li {
+    list-style-type: none;
+}
+
+a:hover {
+    color: red;
+}
+.main-header {
+    border-bottom: 1px solid #ededed;
+}
+.main-top-header {
+    height: 50px;
+    margin: 20px 0;
+}
+
+.search {
+    height: 40px;
+    width: 30%;
+}
+
+.logo {
+    width: 20%;
+
+}
+
+.logo img {
+    width: 50%;
+}
+
+.action {
+    width: 20%;
+}
+
+.action span {
+    margin: 0 20px;
+
+}
+.action {
+    font-size: 18px;
+}
+
+/* nav bar */
+.nav-item {
+    margin: 0 20px;
+    font-size: 18px;
+}
+
+.nav-item:hover {
+    color: red
+}
+
+#slider-container {
+    height: 400px;
+    overflow: hidden;
+}
+
+
+/* end header*/
+
