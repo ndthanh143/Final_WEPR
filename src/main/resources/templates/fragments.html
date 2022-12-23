@@ -23,7 +23,7 @@
                    th:text="${session.user.getName()}"></a>
                 <ul class="dropdown-menu mt-1">
                     <li><a class="dropdown-item" th:href="@{/me}">My account</a></li>
-                    <li><a class="dropdown-item" href="#">My orders</a></li>
+                    <li><a class="dropdown-item" th:href="@{/myorder}">My orders</a></li>
                     <li th:if="${session.user.getRole() == 'admin'}"><a class="dropdown-item" th:href="@{/admin/dashboard}">Management Site</a></li>
                     <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
                 </ul>
@@ -105,7 +105,9 @@
 <!--Start admin topbar-->
 <div th:fragment="admin-topbar" class="topbar d-flex justify-content-between align-items-center">
     <div class="logo">
-        <h2>Book store</h2>
+        <a th:href="@{/}">
+            <h2>Book store</h2>
+        </a>
     </div>
     <div class="search d-flex">
         <input type="text" name="search" id="search" placeholder="search here">

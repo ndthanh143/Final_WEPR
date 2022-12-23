@@ -9,9 +9,7 @@ import com.example.book_shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -76,6 +74,44 @@ public class CartController {
             session.setAttribute("totalItems", cart.getTotalItems());
             model.addAttribute("cart", cart);
             return "cart";
+        }
+
+    }
+
+    @PostMapping("/update-cart")
+    public String updateCart(@RequestParam("quantity") int quantity,
+                             @RequestParam("id") Integer productId,
+                             Model model,
+                             Principal principal
+    ){
+
+        if(principal == null){
+            return "redirect:/login";
+        }else{
+            String email = principal.getName();
+            User customer = userService.findByEmail(email);
+            Product product = productService.getById(productId);
+            Cart cart = cartService.updateItemInCart(product, quantity, customer);
+
+            model.addAttribute("shoppingCart", cart);
+            return "redirect:/cart";
+        }
+
+    }
+
+    @PostMapping("/delete-cart")
+    public String deleteItemFromCart(@RequestParam("id") Integer productId,
+                                     Model model,
+                                     Principal principal){
+        if(principal == null){
+            return "redirect:/login";
+        }else{
+            String email = principal.getName();
+            User customer = userService.findByEmail(email);
+            Product product = productService.getById(productId);
+            Cart cart = cartService.deleteItemFromCart(product, customer);
+            model.addAttribute("cart", cart);
+            return "redirect:/cart";
         }
 
     }

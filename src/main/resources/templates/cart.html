@@ -15,37 +15,45 @@
 
 <div class="d-flex mx-auto" style="width: 85%; margin-top: 60px; margin-bottom: 200px">
     <div class="cart" style="width: 70%">
-        <table>
-            <div class="d-flex " style="border-bottom: 2px solid #EBEBEB; font-size: 18px; padding-bottom:15px">
-                <div style="width: 20%; "></div>
-                <div style="flex: 1; ">Sản phẩm</div>
-                <div style="width: 15%; ">Giá</div>
-                <div style="width: 15%; ">Số lượng</div>
-                <div style="width: 15%; ">Tạm tính</div>
-            </div>
-            <div class="d-flex" style="align-items: center; border-bottom: 2px solid #EBEBEB;" th:each="item: ${cart.getCartItem()}">
-                <div style="width: 20%;  padding: 15px 20px;" class="d-flex justify-content-around align-items-center">
-                    <i class="fas fa-trash" style="font-size: 20px; cursor: pointer"></i>
-                    <img th:src="*{'data:image/jpeg;base64,' + item.product.imageUrl}" alt="" style="width:70px">
+<!--        <form th:action="@{/update-cart}" method="post">-->
+            <table>
+                <div class="d-flex " style="border-bottom: 2px solid #EBEBEB; font-size: 18px; padding-bottom:15px">
+                    <div style="width: 20%; "></div>
+                    <div style="flex: 1; ">Sản phẩm</div>
+                    <div style="width: 15%; ">Giá</div>
+                    <div style="width: 15%; ">Số lượng</div>
+                    <div style="width: 15%; ">Tạm tính</div>
                 </div>
-                <div style="flex: 1; padding: 10px 0;">
-                    <p class="my-0 fw-bold" style="font-size: 18px" th:text="*{item.product.name}"></p>
-                    <p class="my-0 fw-light" style="font-size: 15px; font-style: italic;" th:text="*{item.product.author}"></p>
+                <div class="d-flex" style="align-items: center; border-bottom: 2px solid #EBEBEB;" th:each="item: ${cart.getCartItem()}">
+                    <div style="width: 20%;  padding: 15px 20px;" class="d-flex justify-content-around align-items-center">
+                        <form th:action="@{/delete-cart}" method="post">
+                            <input type="hidden" th:value="${item.product.productID}" name="id">
+                            <i class="fas fa-trash" style="font-size: 20px; cursor: pointer; position: relative">
+                                <input type="submit" style="position: absolute; width: 100%; height: 100%; left: 0; opacity: 0">
+                            </i>
+                        </form>
+                        <img th:src="*{'data:image/jpeg;base64,' + item.product.imageUrl}" alt="" style="width:70px">
+                    </div>
+                    <div style="flex: 1; padding: 10px 0;">
+                        <p class="my-0 fw-bold" style="font-size: 18px" th:text="*{item.product.name}"></p>
+                        <p class="my-0 fw-light" style="font-size: 15px; font-style: italic;" th:text="*{item.product.author}"></p>
+                    </div>
+                    <div style="width: 15%;  padding: 10px 0; font-weight: bold" th:text="*{item.product.price}"></div>
+                    <div style="width: 15%;  padding: 10px 0;">
+                        <input type="number" style="width: 50px; border:1px solid #ededed; outline:none; text-align:center" th:value="*{item.getQuantity()}" name="quantity">
+                    </div>
+                    <div style="width: 15%; padding: 10px 0; font-weight: bold" th:text="*{item.getTotalPrice()}"></div>
                 </div>
-                <div style="width: 15%;  padding: 10px 0; font-weight: bold" th:text="*{item.product.price}"></div>
-                <div style="width: 15%;  padding: 10px 0;">
-                    <input type="number" style="width: 50px; border:1px solid #ededed; outline:none; text-align:center" th:value="*{item.getQuantity()}">
+            </table>
+            <div class="d-flex mt-4 justify-content-between">
+                <div class="d-flex" style="width: 300px">
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nhập mã giảm giá" style="width: 60%">
+                    <button class="btn btn-primary" style="margin-left: 10px">Áp dụng</button>
                 </div>
-                <div style="width: 15%; padding: 10px 0; font-weight: bold" th:text="*{item.getTotalPrice()}"></div>
+                <input type="submit" class="btn btn-primary" value="Cập nhật giỏ hàng">
             </div>
-        </table>
-        <div class="d-flex mt-4 justify-content-between">
-            <div class="d-flex" style="width: 300px">
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nhập mã giảm giá" style="width: 60%">
-                <button class="btn btn-primary" style="margin-left: 10px">Áp dụng</button>
-            </div>
-            <button type="button" class="btn btn-primary">Cập nhật giỏ hàng</button>
-        </div>
+<!--        </form>-->
+
     </div>
     <div class="checkout" style="width: 25%; margin-left: 40px; border: 6px solid #ebebeb; padding: 10px 30px">
         <h4 style="border-bottom: 1px solid #ebebeb; padding-bottom: 15px">Cộng giỏ hàng</h4>
@@ -61,7 +69,7 @@
             <span>Tổng</span>
             <span class="fw-bold" style="font-size: 20px; color: rgb(255, 136, 0)" th:text="${cart.getTotalPrices()} + 'đ'"></span>
         </div>
-        <button class="btn btn-danger my-2" style="width:100%">Tiến hành thanh toán</button>
+        <button class="btn btn-danger my-2" style="width:100%"><a th:href="@{/checkout}" style="color: #fff">Tiến hành thanh toán</a></button>
     </div>
 </div>
 
