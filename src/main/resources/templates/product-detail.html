@@ -24,7 +24,7 @@
                 <h3 class="title" th:text="${product.name}"></h3>
                 <p class="author">Tác giả: <span th:text="${product.author}"></span></p>
                 <p class="category">Lĩnh vực: <span th:text="${product.category.name}"></span></p>
-                <span class="price" th:text="${product.price}"></span>
+                <span class="price" th:text="${product.price} + 'đ'"></span>
                 <div class="delivery">
                     <p class="mb-0">Vận chuyển:</p>
                     <p>Giảm 30% phí vận chuyển bởi Nhất Tín Express (NTX)</p>

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +24,7 @@ public class Order {
     private int totalPrice;
     private int shippingFee = 0;
     private String payment;
+    private Date orderDate;
     private String paymentStatus = "Chưa thanh toán";
     private String orderStatus = "Chưa xác nhận";
     private String notes;
@@ -32,5 +34,5 @@ public class Order {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    private Set<OrderDetail> orderDetails;
+    private List<OrderDetail> orderDetails;
 }

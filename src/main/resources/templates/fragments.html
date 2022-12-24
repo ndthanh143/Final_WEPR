@@ -105,7 +105,7 @@
 <!--Start admin topbar-->
 <div th:fragment="admin-topbar" class="topbar d-flex justify-content-between align-items-center">
     <div class="logo">
-        <a th:href="@{/}">
+        <a th:href="@{/}" style="text-decoration: none">
             <h2>Book store</h2>
         </a>
     </div>
@@ -145,7 +145,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="/admin/orders">
                 <i class="fas fa-bags-shopping"></i>
                 <div>Orders</div>
             </a>

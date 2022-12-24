@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
+
 @Controller
 public class UserController {
     private UserService userService;
@@ -25,7 +28,13 @@ public class UserController {
     }
 
     @GetMapping("/admin/user/{id}")
-    public String updateUserForm(@PathVariable("id") Integer id, Model model) {
+    public String updateUserForm(@PathVariable("id") Integer id, Model model, HttpSession session, Principal principal) {
+        if(principal == null){
+            return "redirect:/login";
+        }
+        String email = principal.getName();
+        User userLoggedIn = userService.findByEmail(email);
+        session.setAttribute("user", userLoggedIn);
         User user = userService.getById(id);
         model.addAttribute("user", user);
         return "admin-user-update";

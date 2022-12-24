@@ -12,4 +12,10 @@ public interface OrderService {
     Order save(Order order, User user);
 
     List<Order> ListUserOrders(Integer userID);
+
+    Order getById(Integer id);
+
+    void deleteByID(Integer id);
+
+    Order update(Integer id, String paymentStatus, String orderStatus);
 }

@@ -59,22 +59,24 @@
     </div>
     <table class="table">
       <div class="d-flex fw-bold">
-        <div class="px-2 py-1" style="border: 1px solid #ccc; width:15%;">ID</div>
-        <div class="px-2 py-1" style="border: 1px solid #ccc; width:20%;">User name</div>
-        <div class="px-2 py-1" style="border: 1px solid #ccc; flex:1;">Email</div>
-        <div class="px-2 py-1" style="border: 1px solid #ccc; width:10%;">Role</div>
+        <div class="px-2 py-1" style="border: 1px solid #ccc; width:10%;">ID</div>
+        <div class="px-2 py-1" style="border: 1px solid #ccc; width:20%;">Ngày đặt hàng</div>
+        <div class="px-2 py-1" style="border: 1px solid #ccc; flex:1;">Trạng thái</div>
+        <div class="px-2 py-1" style="border: 1px solid #ccc; width:20%;">Người đặt</div>
+        <div class="px-2 py-1" style="border: 1px solid #ccc; width:15%;">Tổng đơn hàng</div>
         <div class="px-2 py-1" style="border: 1px solid #ccc; width:15%;">Action</div>
       </div>
-      <div class="d-flex" th:each="user : ${users}">
-        <div class="px-2 py-1" style="border: 1px solid #ccc; width:15%;" th:text="${user.userID}"></div>
-        <div class="px-2 py-1" style="border: 1px solid #ccc; width:20%;" th:text="${user.name}"></div>
-        <div class="px-2 py-1" style="border: 1px solid #ccc; flex:1;" th:text="${user.email}"></div>
-        <div class="px-2 py-1" style="border: 1px solid #ccc; width:10%;" th:text="${user.role}"></div>
+      <div class="d-flex" th:each="order : ${orders}">
+        <div class="px-2 py-1" style="border: 1px solid #ccc; width:10%;" th:text="${order.orderID}"></div>
+        <div class="px-2 py-1" style="border: 1px solid #ccc; width:20%;" th:text="${order.getOrderDate()}"></div>
+        <div class="px-2 py-1" style="border: 1px solid #ccc; flex:1;" th:text="${order.payment} + ' - ' + ${order.getOrderStatus()}"></div>
+        <div class="px-2 py-1" style="border: 1px solid #ccc; width: 20%" th:text="${order.name}"></div>
+        <div class="px-2 py-1" style="border: 1px solid #ccc; width:15%;" th:text="${order.totalPrice} + 'đ'"></div>
         <div class="px-2 py-1 d-flex justify-content-center align-items-center" style="border: 1px solid #ccc; width:15%;" >
-          <a class="mx-2" th:href="@{/admin/user/{id} (id = ${user.userID})}" style="background-color: #ccc; border-radius: 4px; padding: 10px; font-size: 20px;" >
+          <a class="mx-2" th:href="@{/admin/order/{id} (id = ${order.getOrderID()})}" style="background-color: #ccc; border-radius: 4px; padding: 10px; font-size: 20px;" >
             <i class="fas fa-pen"></i>
           </a>
-          <a class="mx-2" th:href="@{/delete-user/{id} (id = ${user.userID})}" style="background-color: #ccc; border-radius: 4px; padding: 10px; font-size: 20px;" >
+          <a class="mx-2" th:href="@{/delete-order/{id} (id = ${order.orderID})}" style="background-color: #ccc; border-radius: 4px; padding: 10px; font-size: 20px;" >
             <i class="fas fa-trash" style="color: red"></i>
           </a>
         </div>
